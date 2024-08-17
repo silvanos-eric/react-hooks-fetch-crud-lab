@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function QuestionForm(props) {
+function QuestionForm({ onAdd }) {
   const [formData, setFormData] = useState({
     prompt: "",
     answer1: "",
@@ -19,7 +19,17 @@ function QuestionForm(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(formData);
+    const question = {
+      prompt: formData.prompt,
+      answers: [
+        formData.answer1,
+        formData.answer2,
+        formData.answer3,
+        formData.answer4,
+      ],
+      correctIndex: formData.correctIndex,
+    };
+    onAdd(question);
   }
 
   return (
@@ -33,6 +43,7 @@ function QuestionForm(props) {
             name="prompt"
             value={formData.prompt}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
@@ -42,6 +53,7 @@ function QuestionForm(props) {
             name="answer1"
             value={formData.answer1}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
@@ -51,6 +63,7 @@ function QuestionForm(props) {
             name="answer2"
             value={formData.answer2}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
@@ -60,6 +73,7 @@ function QuestionForm(props) {
             name="answer3"
             value={formData.answer3}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
@@ -69,6 +83,7 @@ function QuestionForm(props) {
             name="answer4"
             value={formData.answer4}
             onChange={handleChange}
+            required
           />
         </label>
         <label>
@@ -77,6 +92,7 @@ function QuestionForm(props) {
             name="correctIndex"
             value={formData.correctIndex}
             onChange={handleChange}
+            required
           >
             <option value="0">{formData.answer1}</option>
             <option value="1">{formData.answer2}</option>
